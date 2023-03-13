@@ -1,23 +1,21 @@
-import React from 'react';
-
-import { motion } from 'framer-motion';
-import { transition1 } from '../transitions'
-
-import Gallery from '../components/Gallery';
+import { React, useState } from 'react';
+import photos from '../components/Gallery';
+import PhotoAlbum from "react-photo-album";
 
 const Portfolio = () => {
-  return <motion.section 
-    initial={{ opacity: 0, y: '100%' }} 
-    animate={{ opacity: 1, y: 0 }} 
-    exit={{ opacity: 0, y:'100%' }} 
-    transition={ transition1 }
-    className='section'>
-    <div className='container mx-auto h-full relative'>
-      <div className='h-full pt-20'>
-        <Gallery />
+  return <section className='section mt-[100px] lg:mt-[140px] overflow-y-scroll'>
+    <div className='w-full max-w-7xl mx-auto p-6 lg:px-8'>
+      {/* TEXT */}
+      <div className='pb-10 lg:mx-0'>
+        <h1 className='h1'>Portfolio</h1>
       </div>
+      {/* IMAGES */}
+      <PhotoAlbum 
+        photos={photos} 
+        layout="masonry"
+      />
     </div>
-  </motion.section>;
+  </section>;
 };
 
 export default Portfolio;

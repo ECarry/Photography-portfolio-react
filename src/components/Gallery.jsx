@@ -1,11 +1,47 @@
-import PhotoAlbum from "react-photo-album";
+const breakpoints = [1080, 640, 384, 256, 128, 96, 64, 48];
 
-const photos = [
-    { src: "https://images.unsplash.com/photo-1624385690664-38a3af477cd9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80", width: 1740, height: 800 },
-    { src: "https://images.unsplash.com/photo-1654018869756-d08407972836?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2918&q=80", width: 2918, height: 1200 },
-    { src: "https://darmau.design/_next/image?url=https%3A%2F%2Fdarmau-design.hks3.layerstackobjects.com%2FDSC_00345_91e5d380e5.jpeg&w=3840&q=75", width: 2918, height: 1200 }
+const unsplashLink = function (id, width, height) {
+    return `https://source.unsplash.com/${id}/${width}x${height}`;
+};
+
+const unsplashPhotos = [
+    { id: "Osq7UAVxIOI", width: 1080, height: 780 },
+    { id: "Dhmn6ete6g8", width: 1080, height: 1620 },
+    { id: "RkBTPqPEGDo", width: 1080, height: 720 },
+    { id: "Yizrl9N_eDA", width: 1080, height: 721 },
+    { id: "KG3TyFi0iTU", width: 1080, height: 1620 },
+    { id: "Jztmx9yqjBw", width: 1080, height: 607 },
+    { id: "-heLWtuAN3c", width: 1080, height: 608 },
+    { id: "xOigCUcFdA8", width: 1080, height: 720 },
+    { id: "1azAjl8FTnU", width: 1080, height: 1549 },
+    { id: "ALrCdq-ui_Q", width: 1080, height: 720 },
+    { id: "twukN12EN7c", width: 1080, height: 694 },
+    { id: "9UjEyzA6pP4", width: 1080, height: 1620 },
+    { id: "sEXGgun3ZiE", width: 1080, height: 720 },
+    { id: "S-cdwrx-YuQ", width: 1080, height: 1440 },
+    { id: "q-motCAvPBM", width: 1080, height: 1620 },
+    { id: "Xn4L310ztMU", width: 1080, height: 810 },
+    { id: "iMchCC-3_fE", width: 1080, height: 610 },
+    { id: "X48pUOPKf7A", width: 1080, height: 160 },
+    { id: "GbLS6YVXj0U", width: 1080, height: 810 },
+    { id: "9CRd1J1rEOM", width: 1080, height: 720 },
+    { id: "xKhtkhc9HbQ", width: 1080, height: 1440 },
 ];
 
-export default function Gallery() {
-    return <PhotoAlbum layout="rows" photos={photos} />;
-}
+const photos = unsplashPhotos.map(function (photo) {
+    return {
+        src: unsplashLink(photo.id, photo.width, photo.height),
+        width: photo.width,
+        height: photo.height,
+        images: breakpoints.map(function (breakpoint) {
+            const height = Math.round((photo.height / photo.width) * breakpoint);
+            return {
+                src: unsplashLink(photo.id, breakpoint, height),
+                width: breakpoint,
+                height,
+            };
+        }),
+    };
+});
+
+export default photos;
