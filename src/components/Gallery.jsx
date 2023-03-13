@@ -1,6 +1,6 @@
 const breakpoints = [1080, 640, 384, 256, 128, 96, 64, 48];
 
-const unsplashLink = function (id, width, height) {
+const unsplashLink = (id, width, height) => {
     return `https://source.unsplash.com/${id}/${width}x${height}`;
 };
 
@@ -28,12 +28,12 @@ const unsplashPhotos = [
     { id: "xKhtkhc9HbQ", width: 1080, height: 1440 },
 ];
 
-const photos = unsplashPhotos.map(function (photo) {
+const photos = unsplashPhotos.map( (photo) => {
     return {
         src: unsplashLink(photo.id, photo.width, photo.height),
         width: photo.width,
         height: photo.height,
-        images: breakpoints.map(function (breakpoint) {
+        images: breakpoints.map( (breakpoint) => {
             const height = Math.round((photo.height / photo.width) * breakpoint);
             return {
                 src: unsplashLink(photo.id, breakpoint, height),
