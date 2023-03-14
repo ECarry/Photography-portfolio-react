@@ -1,30 +1,31 @@
-import { React, useState } from 'react';
-import photos from '../components/Gallery';
+import { React, useState, useEffect } from 'react';
 import PhotoAlbum from "react-photo-album";
+import axios from 'axios'
 
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
-
-// import optional lightbox plugins
-import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
-import Slideshow from "yet-another-react-lightbox/plugins/slideshow";
-import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
-import "yet-another-react-lightbox/plugins/thumbnails.css";
-
-const slides = photos.map(({ src, width, height, images }) => ({
-  src,
-  width,
-  height,
-  srcSet: images.map((image) => ({
-      src: image.src,
-      width: image.width,
-      height: image.height,
-  })),
-}));
+const renderPhoto = ({ imageProps: { alt, ...restImageProps } }) => (
+  <div style={{ border: "1px solid black" }}>
+    <img alt={alt} style={{ width: "100%", height: "auto" }} {...restImageProps} />
+  </div>
+);
 
 const Portfolio = () => {
-  const [index, setIndex] = useState(-1);
+  const [ photos, setPhotos ] = useState([])
+
+  useEffect(() => {
+    axios
+      .get("https://api.ecarry.cc/api/photos/")
+      .then( response => {
+        const data = response.data;
+        const photos = data.map( photo => {
+          const { thumbnail } = photo;
+          return { src: thumbnail };
+        });
+        setPhotos(photos);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return <section className='section mt-[100px] lg:mt-[140px] overflow-y-scroll'>
     <div className='w-full max-w-7xl mx-auto p-6 lg:px-8'>
@@ -34,16 +35,7 @@ const Portfolio = () => {
       </div>
       {/* IMAGES */}
       <>
-        <PhotoAlbum photos={photos} layout="masonry" targetRowHeight={150} onClick={({ index }) => setIndex(index)} />
-
-        <Lightbox
-            slides={slides}
-            open={index >= 0}
-            index={index}
-            close={() => setIndex(-1)}
-            // enable optional lightbox plugins
-            plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
-        />
+        <PhotoAlbum photos={photos} layout="masonry" renderPhoto={renderPhoto}/>
       </>
     </div>
   </section>;

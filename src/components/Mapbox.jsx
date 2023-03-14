@@ -16,9 +16,11 @@ const Map = ({ markers }) => {
       projection: 'mercator',
     });
 
+    console.log('markers', markers)
+
     // 添加标记
     markers.forEach((marker) => {
-      const { id, coordinates, title } = marker;
+      const { id, coordinates } = marker;
       // const el = document.createElement('div');
       // el.className = 'marker';
       // el.style.backgroundImage = 'url(../assets/paw.svg)';

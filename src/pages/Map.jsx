@@ -1,14 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Mapbox from '../components/Mapbox';
+import axios from 'axios'
+
+
 
 const Map = () => {
-  const markers = [
-    { id: 1, coordinates: [118.0799855, 24.439984166666665], title: 'Marker 1' }
-  ];
+  const [ markers, setMarkers ]= useState([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("https://api.ecarry.cc/api/photos/")
+      .then((response) => {
+        const data = response.data;
+        const markers = data.map((item) => {
+          const { id, lat, lon } = item;
+          return {
+            id,
+            coordinates: [lon, lat],
+          };
+        });
+        setMarkers(markers);
+        setDataLoaded(true);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return <section className='section fixed'>
     <div className='w-full h-full'>
-      <Mapbox markers={markers}/>
+      {dataLoaded ? (
+        <Mapbox markers={markers} />
+      ) : (
+        <p>Loading data...</p>
+      )}
     </div>
   </section>;
 };
