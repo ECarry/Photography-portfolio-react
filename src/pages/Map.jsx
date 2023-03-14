@@ -33,7 +33,7 @@ const Map = () => {
       {dataLoaded ? (
         <Mapbox markers={markers} />
       ) : (
-        <p>Loading data...</p>
+        <div className='flex justify-center h-full items-center'><p>Loading data...</p></div>
       )}
     </div>
   </section>;

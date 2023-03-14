@@ -17,8 +17,8 @@ const Portfolio = () => {
       .then( response => {
         const data = response.data;
         const photos = data.map( photo => {
-          const { thumbnail } = photo;
-          return { src: thumbnail };
+          const { id, thumbnail, thumbnail_width, thumbnail_height } = photo;
+          return { id, src: thumbnail, width: thumbnail_width, height: thumbnail_height };
         });
         setPhotos(photos);
       })
@@ -27,7 +27,7 @@ const Portfolio = () => {
       });
   }, []);
 
-  return <section className='section mt-[100px] lg:mt-[140px] overflow-y-scroll'>
+  return <section className='section pt-[100px] lg:pt-[140px]'>
     <div className='w-full max-w-7xl mx-auto p-6 lg:px-8'>
       {/* TEXT */}
       <div className='pb-10 lg:mx-0'>

@@ -16,3 +16,8 @@
     @apply py-[18px] px-[50px] h-[66px] flex items-center justify-center text-base uppercase font-secondary font-semibold bg-primary text-white;
   }
 }
+
+/* 设置滚动条的宽度 */
+::-webkit-scrollbar {
+  width:0;
+}
