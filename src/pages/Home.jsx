@@ -14,14 +14,14 @@ const Home = () => {
     </div>
     {/* IMG AND METADATA */}
     {photos.map( photo => (
-      <div className='mb-12'>
+      <div className='mb-12' key={photo.id}>
         {/* IMG */}
         <div className='flex justify-center items-center mb-5 shadow-lg'>
           <img src={photo.thumbnail} alt="" className='max-h-[720px] object-contain'/>
         </div>
         {/* METADATA */}
-        <div className='flex justify-center items-center text-[18px] font-thin'>
-          <CameraParameters key={photo.id} photo={photo} />
+        <div className='flex justify-center items-center font-thin'>
+          <CameraParameters photo={photo} />
         </div>
       </div>
     ))}

@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import Mapbox from '../components/Mapbox';
-import axios from 'axios'
 
-
+import { useFetchPhotos } from '../hooks/usePhotos'
 
 const Map = () => {
   const [ markers, setMarkers ]= useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
+  const photos = useFetchPhotos()
+
   useEffect(() => {
-    axios
-      .get("https://api.ecarry.cc/api/photos/")
-      .then((response) => {
-        const data = response.data;
-        const markers = data.map((item) => {
-          const { id, lat, lon } = item;
-          return {
-            id,
-            coordinates: [lon, lat],
-          };
-        });
-        setMarkers(markers);
-        setDataLoaded(true);
-      })
-      .catch((error) => {
-        console.error(error);
+    if (photos.length > 0) {
+      const markers = photos.map((item) => {
+        const { id, lat, lon, thumbnail } = item;
+
+        return {
+          id,
+          coordinates: [lon, lat],
+          thumbnail,
+        };
       });
-  }, []);
+      setMarkers(markers);
+      setDataLoaded(true);
+    }
+  }, [photos]);
 
   return <section className='section fixed'>
     <div className='w-full h-full'>
