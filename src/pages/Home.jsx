@@ -1,10 +1,32 @@
 import React from 'react';
+import { useFetchPhotos } from '../hooks/usePhotos'
 
+import CameraParameters from '../components/CameraParameters';
 
 const Home = () => {
-  return <section className='section bg-blue-200 h-screen'>
+  const photos = useFetchPhotos()
 
-  </section>;
+  return <section className='section pt-[100px] lg:pt-[140px]'>
+  <div className='w-full max-w-7xl mx-auto p-6 lg:px-8'>
+    {/* TEXT */}
+    <div className='pb-10 lg:mx-0'>
+      <h1 className='h1'>Home</h1>
+    </div>
+    {/* IMG AND METADATA */}
+    {photos.map( photo => (
+      <div className='mb-12'>
+        {/* IMG */}
+        <div className='flex justify-center items-center mb-5 shadow-lg'>
+          <img src={photo.thumbnail} alt="" className='max-h-[720px] object-contain'/>
+        </div>
+        {/* METADATA */}
+        <div className='flex justify-center items-center text-[18px] font-thin'>
+          <CameraParameters key={photo.id} photo={photo} />
+        </div>
+      </div>
+    ))}
+  </div>
+</section>;
 };
 
 export default Home;
