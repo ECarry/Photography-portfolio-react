@@ -2,6 +2,7 @@ import React from 'react';
 
 import { RiCameraLensLine, RiTimer2Line, RiCameraLensFill, RiCameraLine, RiStarFill, RiStarHalfFill, RiStarLine, RiCompass3Line } from 'react-icons/ri';
 
+import Iso from '../assets/iso.png'
 
 const CameraParameters = (props) => {
   const photo = props.photo
@@ -34,7 +35,7 @@ const CameraParameters = (props) => {
       <li className='flex items-center'><RiCameraLensFill /><p className='ml-2'>{photo.camera_lens}</p></li>
       <li className='flex items-center'><RiCameraLensLine /><p className='ml-2'>{photo.aperture}</p></li>
       <li className='flex items-center'><RiTimer2Line /><p className='ml-2'>{photo.shutter_speed}</p></li>
-      <li className='flex items-center'><span className='font-medium'>iso</span><p className='ml-2'>{photo.iso}</p></li>
+      <li className='flex items-center'><img src={Iso} alt="My Image" className='max-w-[24px]' /><p className='ml-2'>{photo.iso}</p></li>
     </ul>
     <ul className='flex gap-x-4 text-[#696c6d] cursor-default'>
       <li className='flex items-center cursor-pointer hover:text-[#363a3c] transition'><RiCompass3Line /></li>
