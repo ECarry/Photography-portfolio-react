@@ -4,7 +4,7 @@ import { ImTwitter, ImPinterest, ImInstagram, ImSinaWeibo } from 'react-icons/im
 import { SiBilibili } from 'react-icons/si';
 
 const Socials = () => {
-  return <div className='hidden xl:flex ml-24'>
+  return <div className='hidden md:flex ml-24'>
     <ul className='flex gap-x-4 text-[#696c6d]'>
       <li><a href='https://www.bilibili.com' target='_blank' className='hover:text-primary transition'><SiBilibili /></a></li>
       <li><a href='https://www.twitter.com' target='_blank' className='hover:text-primary transition'><ImTwitter /></a></li>
