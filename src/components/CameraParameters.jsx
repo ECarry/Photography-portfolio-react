@@ -26,7 +26,7 @@ const CameraParameters = (props) => {
   }
 
 
-  return <div className='flex w-full justify-between items-center px-10 text-[#696c6d]'>
+  return <div className='flex w-full justify-between items-center md:px-10 text-[#696c6d]'>
     {/* <ul className='flex gap-x-4 text-[#696c6d] cursor-default'>
       <li className='flex items-center'>{stars}</li>
     </ul>
@@ -43,14 +43,14 @@ const CameraParameters = (props) => {
 
     {/* CAMERA TEXT */}
     <div className='text-center'>
-      <span className='text-xl font-medium'>{photo.camera_brand} {photo.camera_model}</span>
-      <p>{photo.camera_lens}</p>
+      <span className='md:text-xl font-medium'>{photo.camera_brand} {photo.camera_model}</span>
+      <p className='hidden md:block'>{photo.camera_lens}</p>
     </div>
 
     {/* CAMERA PARAS */}
     <div className='flex items-center gap-4'>
       {/* LENS LOGO */}
-      <div className='flex w-10 h-10'>
+      <div className='flex items-center w-5 h-5 md:w-10 xl:h-10'>
         <img src="https://cdn-icons-png.flaticon.com/512/5969/5969288.png" alt="" />
       </div>
 
