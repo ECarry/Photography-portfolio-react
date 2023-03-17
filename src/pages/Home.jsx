@@ -3,6 +3,8 @@ import { useFetchPhotos } from '../hooks/usePhotos'
 
 import CameraParameters from '../components/CameraParameters';
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 const Home = () => {
   const photos = useFetchPhotos()
 
@@ -16,8 +18,20 @@ const Home = () => {
     {photos.map( photo => (
       <div className='mb-12' key={photo.id}>
         {/* IMG */}
-        <div className='flex justify-center items-center mb-5 shadow-lg'>
-          <img src={photo.thumbnail} alt="" className='max-h-[620px] xl:max-h-[820px] object-contain'/>
+        <div 
+          className='flex justify-center items-center mb-5 shadow-lg'>
+          {/* <img 
+            src={photo.thumbnail} 
+            alt="" 
+            className='max-h-[620px] xl:max-h-[820px] object-contain'
+          /> */}
+          <LazyLoadImage
+            alt=""
+            height={photo.thumbnail_height}
+            src={photo.thumbnail} // use normal <img> attributes as props
+            width={photo.thumbnail_width}
+            className="max-h-[620px] xl:max-h-[820px] object-contain"
+          />
         </div>
         {/* METADATA */}
         <div className='flex justify-center items-center font-thin'>

@@ -38,7 +38,16 @@ const Mapbox = ({ markers }) => {
       // 添加标记
       markers.forEach((marker) => {
         const { coordinates, thumbnail } = marker;
-        const popup = new mapboxgl.Popup().setHTML(`<img src="${thumbnail}" />`);
+
+        const imgHtml = `
+          <div>
+            <h1>廈門</h1>
+            <p>思明區</p>
+            <img src="${thumbnail}" />
+          </div>
+        `
+
+        const popup = new mapboxgl.Popup().setHTML(imgHtml);
         const el = document.createElement('div');
         el.className = 'marker';
         el.style.backgroundImage = 'url(https://cdn-icons-png.flaticon.com/512/763/763755.png)';
