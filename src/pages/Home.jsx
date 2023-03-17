@@ -17,7 +17,7 @@ const Home = () => {
       <div className='mb-12' key={photo.id}>
         {/* IMG */}
         <div className='flex justify-center items-center mb-5 shadow-lg'>
-          <img src={photo.thumbnail} alt="" className='max-h-[720px] object-contain'/>
+          <img src={photo.thumbnail} alt="" className='max-h-[620px] xl:max-h-[820px] object-contain'/>
         </div>
         {/* METADATA */}
         <div className='flex justify-center items-center font-thin'>
