@@ -13,13 +13,16 @@ const Map = () => {
     if (photos.length > 0) {
       const markers = photos.map((item) => {
         const { id, lat, lon, thumbnail } = item;
-
+        // 如果lat或者lon为null，则跳过此照片对象
+        if (lat === null || lon === null) {
+          return null;
+        }
         return {
           id,
           coordinates: [lon, lat],
           thumbnail,
         };
-      });
+      }).filter(item => item !== null); // 移除数组中为null的元素
       setMarkers(markers);
       setDataLoaded(true);
     }

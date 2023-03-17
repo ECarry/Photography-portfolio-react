@@ -11,22 +11,24 @@ const Mapbox = ({ markers }) => {
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/ecarry/cldmhu6tr000001n33ujbxf7j',
-        center: [118, 24],
-        zoom: 1,
+        center: [118.079986, 24.439984],
+        zoom: 8,
         //antialias: true, //抗锯齿
         projection: 'mercator',
       });
 
-    // 添加地图导航小控件
-    const nav = new mapboxgl.NavigationControl({
-      showCompass: true, // 是否显示指南针
-      showZoom: true, // 是否显示缩放控件
-      visualizePitch: true // 是否可视化俯仰角度
-    });
+      // 添加地图导航小控件
+      const nav = new mapboxgl.NavigationControl({
+        showCompass: true, // 是否显示指南针
+        showZoom: true, // 是否显示缩放控件
+        visualizePitch: true // 是否可视化俯仰角度
+      });
 
-    map.addControl(nav, 'bottom-right'); // 将导航控件添加到地图并设置位置
+      map.addControl(nav, 'bottom-right'); // 将导航控件添加到地图并设置位置
 
-    setMap(map);
+      map.on('load', () => {
+        setMap(map);
+      });
     }   
   }, [map]);
 
@@ -36,21 +38,19 @@ const Mapbox = ({ markers }) => {
       // 添加标记
       markers.forEach((marker) => {
         const { coordinates, thumbnail } = marker;
-        //const bounds = new mapboxgl.LngLatBounds();
+        const popup = new mapboxgl.Popup().setHTML(`<img src="${thumbnail}" />`);
         const el = document.createElement('div');
         el.className = 'marker';
-        const popup = new mapboxgl.Popup().setHTML(`<img src="${thumbnail}" />`);
-        // el.style.backgroundImage = 'url(../assets/paw.svg)';
-        // el.style.width = '50px';
-        // el.style.height = '50px';
+        el.style.backgroundImage = 'url(https://cdn-icons-png.flaticon.com/512/763/763755.png)';
+        el.style.width = '25px';
+        el.style.height = '25px';
+        el.style.backgroundSize = '100%';
 
-        const markerObj = new mapboxgl.Marker()
+        new mapboxgl.Marker(el)
           .setLngLat(coordinates)
           .setPopup(popup)
           .addTo(map);
-        //bounds.extend(markerObj.getLngLat());
       });
-      //map.fitBounds(bounds, { padding: 50 });
     }  
   }, [map, markers])
 
