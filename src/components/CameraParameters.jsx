@@ -41,6 +41,7 @@ const CameraParameters = (props) => {
       <li className='flex items-center cursor-pointer hover:text-[#363a3c] transition'><RiCompass3Line /></li>
     </ul> */}
 
+
     {/* CAMERA TEXT */}
     <div className='text-center'>
       <span className='md:text-xl font-medium'>{photo.camera_brand} {photo.camera_model}</span>
