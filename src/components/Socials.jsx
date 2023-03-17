@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ImTwitter, ImPinterest, ImInstagram, ImSinaWeibo } from 'react-icons/im';
+import { ImTwitter, ImPinterest, ImInstagram, ImSinaWeibo, ImGithub } from 'react-icons/im';
 import { SiBilibili } from 'react-icons/si';
 
 const Socials = () => {
@@ -11,6 +11,7 @@ const Socials = () => {
       <li><a href='https://www.pinterest.com' target='_blank' className='hover:text-primary transition'><ImPinterest /></a></li>
       <li><a href='https://www.instagram.com' target='_blank' className='hover:text-primary transition'><ImInstagram /></a></li>
       <li><a href='https://www.weibo.com' target='_blank' className='hover:text-primary transition'><ImSinaWeibo /></a></li>
+      <li><a href='https://github.com/ecarry' target='_blank' className='hover:text-primary transition'><ImGithub /></a></li>
     </ul>
   </div>;
 };
