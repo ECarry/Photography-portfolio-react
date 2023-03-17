@@ -26,8 +26,8 @@ const CameraParameters = (props) => {
   }
 
 
-  return <div className='flex gap-x-4'>
-    <ul className='flex gap-x-4 text-[#696c6d] cursor-default'>
+  return <div className='flex w-full justify-between items-center px-10 text-[#696c6d]'>
+    {/* <ul className='flex gap-x-4 text-[#696c6d] cursor-default'>
       <li className='flex items-center'>{stars}</li>
     </ul>
     <ul className='flex gap-x-4 text-[#696c6d] cursor-default'>
@@ -39,7 +39,26 @@ const CameraParameters = (props) => {
     </ul>
     <ul className='flex gap-x-4 text-[#696c6d] cursor-default'>
       <li className='flex items-center cursor-pointer hover:text-[#363a3c] transition'><RiCompass3Line /></li>
-    </ul>
+    </ul> */}
+
+    {/* CAMERA TEXT */}
+    <div className='text-center'>
+      <span className='text-xl font-medium'>{photo.camera_brand} {photo.camera_model}</span>
+      <p>{photo.camera_lens}</p>
+    </div>
+
+    {/* CAMERA PARAS */}
+    <div className='flex items-center gap-4'>
+      {/* LENS LOGO */}
+      <div className='flex w-10 h-10'>
+        <img src="https://cdn-icons-png.flaticon.com/512/5969/5969288.png" alt="" />
+      </div>
+
+      {/* PARAS */}
+      <div className='font-medium flex gap-x-3'>
+        <span>{photo.focal_length}mm</span> <span>f/{photo.aperture}</span> <span>{photo.shutter_speed}s</span> <span>ISO{photo.iso}</span>
+      </div>
+    </div>
   </div>;
 };
 
