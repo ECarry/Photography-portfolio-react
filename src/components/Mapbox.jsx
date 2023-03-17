@@ -50,6 +50,16 @@ const Mapbox = ({ markers }) => {
           .setLngLat(coordinates)
           .setPopup(popup)
           .addTo(map);
+
+        // 监听地图缩放事件
+        // map.on('zoom', () => {
+        //   const zoom = map.getZoom();
+        //   if (zoom < 30) {
+        //     markerObj.getElement().style.display = 'none';
+        //   } else {
+        //     markerObj.getElement().style.display = 'block';
+        //   }
+        // });
       });
     }  
   }, [map, markers])
