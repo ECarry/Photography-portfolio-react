@@ -4,6 +4,11 @@ import { RiStarFill, RiStarLine } from 'react-icons/ri';
 
 import DJI from '../assets/DJI.svg'
 import SONY from '../assets/SONY.png'
+import CANON from '../assets/CANON.png'
+import APPLE from '../assets/APPLE.png'
+import NIKON from '../assets/NIKON.png'
+import FUJIFILM from '../assets/FUJIFILM.png'
+
 
 const CameraParameters = (props) => {
   const photo = props.photo
@@ -36,14 +41,36 @@ const CameraParameters = (props) => {
 
     {/* CAMERA PARAS */}
     {photo.camera_brand && <div className='flex items-center gap-4'>
-      {/* LENS LOGO */}
+      {/* CAMERA LOGO */}
       <div className='flex items-center w-5 h-5 md:w-10 xl:h-10'>
-        <img src={photo.camera_brand === 'SONY' ? SONY : DJI} alt="" />
+        {(() => {
+          switch (photo.camera_brand) {
+            case 'Sony':
+              return <img src={SONY} alt="" />;
+            case 'SONY':
+              return <img src={SONY} alt="" />;
+            case 'DJI':
+              return <img src={DJI} alt="" />;
+            case 'NIKON':
+              return <img src={NIKON} alt="" />;
+            case 'Canon':
+              return <img src={CANON} alt="" />;
+            case 'APPLE':
+              return <img src={APPLE} alt="" />;
+            case 'FUJIFILM':
+              return <img src={FUJIFILM} alt="" />;
+            default:
+              return null;
+          }
+        })()}
       </div>
 
       {/* PARAS */}
       <div className='font-medium flex gap-x-3'>
-        <span>{photo.focal_length}mm</span> <span>f/{photo.aperture}</span> <span>{photo.shutter_speed}s</span> <span>ISO{photo.iso}</span>
+        {photo.focal_length && <span>{photo.focal_length}mm</span>}
+        {photo.aperture && <span>f/{photo.aperture}</span>}
+        {photo.shutter_speed && <span>{photo.shutter_speed}s</span>}
+        {photo.iso && <span>ISO{photo.iso}</span>}
       </div>
     </div>
     }
