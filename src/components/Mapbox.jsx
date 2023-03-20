@@ -47,7 +47,10 @@ const Mapbox = ({ markers }) => {
           </div>
         `
 
-        const popup = new mapboxgl.Popup().setHTML(imgHtml);
+        const popup = new mapboxgl.Popup({closeButton: false})
+          .setHTML(imgHtml)
+          .setMaxWidth("480px")
+
         const el = document.createElement('div');
         el.className = 'marker';
         el.style.backgroundImage = 'url(https://cdn-icons-png.flaticon.com/512/763/763755.png)';
