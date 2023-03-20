@@ -3,7 +3,7 @@ import PhotoAlbum from "react-photo-album";
 import axios from 'axios'
 
 const renderPhoto = ({ imageProps: { alt, ...restImageProps } }) => (
-  <div style={{ border: "1px solid black" }}>
+  <div>
     <img alt={alt} style={{ width: "100%", height: "auto" }} {...restImageProps} />
   </div>
 );
@@ -17,8 +17,8 @@ const Portfolio = () => {
       .then( response => {
         const data = response.data;
         const photos = data.map( photo => {
-          const { id, thumbnail, thumbnail_width, thumbnail_height } = photo;
-          return { id, src: thumbnail, width: thumbnail_width, height: thumbnail_height };
+          const { id, image, thumbnail, thumbnail_width, thumbnail_height } = photo;
+          return { id, image:image, src: thumbnail, width: thumbnail_width, height: thumbnail_height };
         });
         setPhotos(photos);
       })
@@ -35,7 +35,14 @@ const Portfolio = () => {
       </div>
       {/* IMAGES */}
       <>
-        <PhotoAlbum photos={photos} layout="masonry" renderPhoto={renderPhoto}/>
+        <PhotoAlbum 
+          photos={photos} 
+          layout="masonry" 
+          renderPhoto={renderPhoto}
+          onClick={({ photo }) => {
+            console.log(photo)
+        }}
+        />
       </>
     </div>
   </section>;
