@@ -40,6 +40,7 @@ const MobileNav = () => {
       <ul className='h-full flex flex-col justify-center items-center gap-y-8 text-3xl text-primary font-primary font-bold'>
         <li><Link to={'/'}>Home</Link></li>
         <li><Link to={'/portfolio'}>Portfolio</Link></li>
+        <li><Link to={'/fanfan'}>FanFan</Link></li>
         <li><Link to={'/map'}>Map</Link></li>
       </ul>
     </motion.div>
