@@ -2,7 +2,7 @@ import React from 'react';
 
 import Home from '../pages/Home';
 import Portfolio from '../pages/Portfolio';
-import FanFan from '../pages/Fanfan';
+import FanFan from '../pages/FanFan';
 import Map from '../pages/Map';
 
 import { Routes, Route, useLocation } from 'react-router-dom';
