@@ -32,9 +32,9 @@ const CameraParameters = (props) => {
   }
 
 
-  return <div className='flex w-full justify-between items-center md:px-10 text-[#696c6d]'>
+  return <div className='flex justify-center w-full md:justify-between items-center md:px-10 text-[#696c6d]'>
     {/* CAMERA TEXT */}
-    <div className='text-center'>
+    <div className='text-center hidden md:block'>
       <span className='md:text-xl font-medium'>{photo.camera_brand} {photo.camera_model}</span>
       <p className='hidden md:block'>{photo.camera_lens}</p>
     </div>
@@ -42,7 +42,7 @@ const CameraParameters = (props) => {
     {/* CAMERA PARAS */}
     {photo.camera_brand && <div className='flex items-center gap-4'>
       {/* CAMERA LOGO */}
-      <div className='flex items-center w-5 h-5 md:w-10 xl:h-10'>
+      <div className='flex justify-center items-center w-10 h-10'>
         {(() => {
           switch (photo.camera_brand) {
             case 'Sony':
