@@ -18,6 +18,7 @@ const Header = () => {
       <nav className='hidden md:flex gap-x-12 font-semibold'>
         <Link to={'/'} className="text-[#696c6d] hover:text-primary transition">Home</Link>
         <Link to={'/portfolio'} className="text-[#696c6d] hover:text-primary transition">Portfolio</Link>
+        <Link to={'/fanfan'} className="text-[#696c6d] hover:text-primary transition">FanFan</Link>
         <Link to={'/map'} className="text-[#696c6d] hover:text-primary transition">Map</Link>
       </nav>
       {/* SOCIALS */}
