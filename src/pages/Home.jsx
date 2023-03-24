@@ -17,18 +17,18 @@ const Home = () => {
     fetchMyData();
   }, []);
 
-  return <section className='section pt-[100px] lg:pt-[140px]'>
+  return <section className='section pt-[100px] md:pt-[140px]'>
   <div className='w-full max-w-7xl mx-auto p-6 lg:px-8'>
     {/* TEXT */}
-    <div className='pb-10 lg:mx-0'>
+    <div className='pb-6 md:pb-10 md:mx-0'>
       <h1 className='h1'>Home</h1>
     </div>
     {/* IMG AND METADATA */}
     {photos.map( photo => (
-      <div className='mb-12' key={photo.id}>
+      <div className='mb-6 md:mb-12' key={photo.id}>
         {/* IMG */}
         <div 
-          className='flex justify-center items-center mb-5 shadow-lg py-10'>
+          className='flex justify-center items-center mb-5 shadow-lg md:py-10'>
           <LazyLoadImage
             alt=""
             height={photo.thumbnail_height}

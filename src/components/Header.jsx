@@ -8,8 +8,8 @@ import Logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-  return <header className='fixed top-0 left-0 w-full z-30 h-[100px] lg:h-[140px] flex items-center backdrop-blur'>
-    <div className='flex w-full items-center justify-between max-w-7xl mx-auto p-6 lg:px-8'>
+  return <header className='fixed top-0 left-0 w-full z-30 h-[100px] md:h-[140px] flex items-center backdrop-blur'>
+    <div className='flex w-full items-center justify-between max-w-7xl mx-auto p-6 md:px-8'>
       {/* LOGO */}
       <Link to={'/'} className='max-w-[250px]'>
         <img src={Logo} alt='' />
