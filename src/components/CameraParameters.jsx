@@ -1,10 +1,10 @@
 import React from 'react';
 import DJI from '../assets/DJI.svg';
-import SONY from '../assets/SONY.png';
+import SONY from '../assets/SONY.svg';
 import CANON from '../assets/CANON.png';
-import APPLE from '../assets/APPLE.png';
-import NIKON from '../assets/NIKON.png';
-import FUJIFILM from '../assets/FUJIFILM.png';
+import APPLE from '../assets/APPLE.svg';
+import NIKON from '../assets/NIKON.svg';
+import FUJIFILM from '../assets/FUJIFILM.svg';
 
 const brandLogos = {
   Sony: SONY,
@@ -40,7 +40,7 @@ const CameraParameters = ({ photo }) => {
       {camera_brand && (
         <div className="flex items-center gap-4">
           {/* CAMERA LOGO */}
-          <div className="flex justify-center items-center w-12 h-12">
+          <div className="flex justify-center items-center w-[80px] h-[40px] overflow-hidden">
             {brandLogos[camera_brand] && <img src={brandLogos[camera_brand]} alt="" />}
           </div>
 
