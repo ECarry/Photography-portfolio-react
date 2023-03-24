@@ -6,6 +6,11 @@ const Mapbox = ({ markers }) => {
   const [map, setMap] = useState(null);
 
   useEffect(() => {
+    if (map) {
+      map.remove(); // 清空地图容器元素
+      setMap(null);
+    }
+
     if (!map) {
       mapboxgl.accessToken = import.meta.env.VITE_APP_MAPBOX_ACCESS_TOKEN;
       const map = new mapboxgl.Map({
@@ -29,21 +34,27 @@ const Mapbox = ({ markers }) => {
       map.on('load', () => {
         setMap(map);
       });
+
+      // 清除地图对象
+      return () => map.remove();
     }   
-  }, [map]);
+  }, []);
 
   
   useEffect(() => {
     if (map && markers.length > 0) {
       // 添加标记
       markers.forEach((marker) => {
-        const { coordinates, thumbnail } = marker;
+        const { coordinates, thumbnail, timestamp, altitude, aperture, shutter_speed, iso } = marker;
 
         const imgHtml = `
           <div>
-            <h1>廈門</h1>
-            <p>思明區</p>
-            <img src="${thumbnail}" />
+            <h1>${timestamp}</h1>
+            <div style="display: flex; justify-content: space-between;">
+              <span>${shutter_speed} 秒 (f/ ${aperture}),  ISO ${iso}</span>
+              <span>高度 ${altitude ? altitude : '0'}m</span>
+            </div>
+            <img src="${thumbnail}"/>
           </div>
         `
 

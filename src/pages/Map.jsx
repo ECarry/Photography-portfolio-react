@@ -8,6 +8,28 @@ const Map = () => {
 
   const [photos, setPhotos] = useState([])
 
+  const processPhotos = (photos) => {
+    return photos
+      .map((item) => {
+        const { id, lat, lon, thumbnail, altitude, image, timestamp, aperture, shutter_speed, iso } = item;
+        if (lat === null || lon === null) {
+          return null;
+        }
+        return {
+          id,
+          coordinates: [lon, lat],
+          thumbnail,
+          altitude,
+          timestamp,
+          image,
+          aperture,
+          shutter_speed,
+          iso
+        };
+      })
+      .filter(item => item !== null);
+  };
+
   useEffect(() => {
     const fetchMyData = async () => {
       const response = await fetchPhotos("/photos");
@@ -18,18 +40,7 @@ const Map = () => {
 
   useEffect(() => {
     if (photos.length > 0) {
-      const markers = photos.map((item) => {
-        const { id, lat, lon, thumbnail } = item;
-        // 如果lat或者lon为null，则跳过此照片对象
-        if (lat === null || lon === null) {
-          return null;
-        }
-        return {
-          id,
-          coordinates: [lon, lat],
-          thumbnail,
-        };
-      }).filter(item => item !== null); // 移除数组中为null的元素
+      const markers = processPhotos(photos);
       setMarkers(markers);
       setDataLoaded(true);
     }
