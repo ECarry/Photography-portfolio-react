@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import Mapbox from '../components/Mapbox';
-
-import { useFetchPhotos } from '../hooks/usePhotos'
+import { fetchPhotos } from '../api/photos'
 
 const Map = () => {
   const [ markers, setMarkers ]= useState([]);
   const [dataLoaded, setDataLoaded] = useState(false);
 
-  const photos = useFetchPhotos()
+  const [photos, setPhotos] = useState([])
+
+  useEffect(() => {
+    const fetchMyData = async () => {
+      const response = await fetchPhotos("/photos");
+      setPhotos(response);
+    };
+    fetchMyData();
+  }, []);
 
   useEffect(() => {
     if (photos.length > 0) {

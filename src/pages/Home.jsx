@@ -1,12 +1,21 @@
 import React from 'react';
-import { useFetchPhotos } from '../hooks/usePhotos'
+import { fetchPhotos } from '../api/photos'
+import { useEffect, useState } from "react";
 
 import CameraParameters from '../components/CameraParameters';
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Home = () => {
-  const photos = useFetchPhotos()
+  const [photos, setPhotos] = useState([])
+
+  useEffect(() => {
+    const fetchMyData = async () => {
+      const response = await fetchPhotos("/photos");
+      setPhotos(response);
+    };
+    fetchMyData();
+  }, []);
 
   return <section className='section pt-[100px] lg:pt-[140px]'>
   <div className='w-full max-w-7xl mx-auto p-6 lg:px-8'>
