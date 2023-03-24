@@ -25,7 +25,7 @@ const Home = () => {
     </div>
     {/* IMG AND METADATA */}
     {photos.map( photo => (
-      <div className='mb-6 md:mb-12' key={photo.id}>
+      <div className='mb-6' key={photo.id}>
         {/* IMG */}
         <div 
           className='flex justify-center items-center mb-5 shadow-lg md:py-10'>

@@ -40,12 +40,12 @@ const CameraParameters = ({ photo }) => {
       {camera_brand && (
         <div className="flex items-center gap-4">
           {/* CAMERA LOGO */}
-          <div className="flex justify-center items-center w-10 h-10">
+          <div className="flex justify-center items-center w-12 h-12">
             {brandLogos[camera_brand] && <img src={brandLogos[camera_brand]} alt="" />}
           </div>
 
           {/* PARAS */}
-          <div className="font-medium flex gap-x-3">
+          <div className="font-thin flex gap-x-3">
             {focal_length && <span>{focal_length}mm</span>}
             {aperture && <span>f/{aperture}</span>}
             {shutter_speed && <span>{shutter_speed}s</span>}
