@@ -47,14 +47,15 @@ const Lightbox = ({ image, exif, onClose }) => {
   };
 
   useEffect(() => {
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${exif.lon},${exif.lat}.json?language=zh_hans&types=place&access_token=${access_token}`;
-    axios.get(url)
-    .then(res => {
-      const { features } = res.data
-      console.log(features[0].place_name);
-      setLocation(features[0].place_name)
-    })
-    
+    if (exif.lon) {
+      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${exif.lon},${exif.lat}.json?language=zh_hans&types=place&access_token=${access_token}`;
+      axios.get(url)
+      .then(res => {
+        const { features } = res.data
+        console.log(features[0].place_name);
+        setLocation(features[0].place_name)
+      })
+    }else setLocation('--')
   })
 
   return (
