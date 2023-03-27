@@ -43,7 +43,6 @@ const Portfolio = () => {
           layout="masonry" 
           renderPhoto={renderPhoto}
           onClick={(photos) => {
-            console.log(photos.photo);
             setPhoto(photos.photo)
             setShowLightbox(true)
           }}

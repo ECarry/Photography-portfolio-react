@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BsStarFill, BsStarHalf, BsStar} from 'react-icons/bs'
 import { RiCameraLensFill } from 'react-icons/ri'
 import { IoTimerOutline } from 'react-icons/io5'
 import isoImg from '../assets/iso.png'
 import focalLengthImg from '../assets/focal-length.png'
+import axios from 'axios';
+
 
 const Rating = ({ rating }) => {
   const fullStars = Math.floor(rating);
@@ -33,13 +35,27 @@ const Parameter = ({ icon, text }) => (
 );
 
 const Lightbox = ({ image, exif, onClose }) => {
-  const [isClosed, setIsClosed] = useState(false);
-  const [ isLoading, setIsLoading ] = useState(true)
+  const [ isClosed, setIsClosed ] = useState(false);
+  const [ isLoading, setIsLoading ] = useState(true);
+  const [ location, setLocation  ] = useState()
+
+  const access_token = import.meta.env.VITE_APP_MAPBOX_ACCESS_TOKEN;
 
   const handleClose = () => {
     setIsClosed(true);
     onClose();
   };
+
+  useEffect(() => {
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${exif.lon},${exif.lat}.json?language=zh_hans&types=place&access_token=${access_token}`;
+    axios.get(url)
+    .then(res => {
+      const { features } = res.data
+      console.log(features[0].place_name);
+      setLocation(features[0].place_name)
+    })
+    
+  })
 
   return (
     <div
@@ -108,7 +124,7 @@ const Lightbox = ({ image, exif, onClose }) => {
 
           <div className='text-center cursor-pointer hover:shadow-lg duration-300 p-2'>
             <div className="text-xs font-medium text-gray-400 mb-1">地点</div>
-            <div className="text-sm font-semibold">{exif.lat}-{exif.lon}</div>
+            <div className="text-sm font-semibold">{location}</div>
           </div>
 
         </div>
