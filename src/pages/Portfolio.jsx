@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import PhotoAlbum from "react-photo-album";
+import Lightbox from '../components/Lightbox';
 import axios from 'axios'
 
 const renderPhoto = ({ imageProps: { alt, ...restImageProps } }) => (
@@ -10,6 +11,8 @@ const renderPhoto = ({ imageProps: { alt, ...restImageProps } }) => (
 
 const Portfolio = () => {
   const [ photos, setPhotos ] = useState([])
+  const [ photo, setPhoto] = useState([])
+  const [ showLightbox, setShowLightbox ] = useState(false)
 
   useEffect(() => {
     axios
@@ -17,8 +20,8 @@ const Portfolio = () => {
       .then( response => {
         const data = response.data;
         const photos = data.map( photo => {
-          const { id, image, thumbnail, thumbnail_width, thumbnail_height } = photo;
-          return { id, image:image, src: thumbnail, width: thumbnail_width, height: thumbnail_height };
+          const { id, image, thumbnail, thumbnail_width, thumbnail_height, timestamp, rating, lat, lon, altitude, aperture, iso, shutter_speed, focal_length, camera_brand, camera_model, camera_lens} = photo;
+          return { id, image, src: thumbnail, width: thumbnail_width, height: thumbnail_height, exif: {timestamp, rating, lat, lon, altitude, aperture, iso, shutter_speed, focal_length, camera_brand, camera_model, camera_lens} };
         });
         setPhotos(photos);
       })
@@ -39,11 +42,21 @@ const Portfolio = () => {
           photos={photos} 
           layout="masonry" 
           renderPhoto={renderPhoto}
-          onClick={({ photo }) => {
-            console.log(photo)
-        }}
+          onClick={(photos) => {
+            console.log(photos.photo);
+            setPhoto(photos.photo)
+            setShowLightbox(true)
+          }}
         />
       </>
+      {/* LIGHTBOX  */}
+      {showLightbox && (
+        <Lightbox
+          image={photo.image}
+          exif={photo.exif}
+          onClose={() => setShowLightbox(false)}
+        />
+      )}
     </div>
   </section>;
 };
