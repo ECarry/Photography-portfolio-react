@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import PhotoAlbum from "react-photo-album";
 import Lightbox from '../components/Lightbox';
-import axios from 'axios'
+import { fetchPhotos } from '../api/photos';
 
 const renderPhoto = ({ imageProps: { alt, ...restImageProps } }) => (
   <div>
@@ -15,19 +15,16 @@ const Portfolio = () => {
   const [ showLightbox, setShowLightbox ] = useState(false)
 
   useEffect(() => {
-    axios
-      .get("https://api.ecarry.cc/api/photos/")
-      .then( response => {
-        const data = response.data;
-        const photos = data.map( photo => {
-          const { id, image, thumbnail, thumbnail_width, thumbnail_height, timestamp, rating, lat, lon, altitude, aperture, iso, shutter_speed, focal_length, camera_brand, camera_model, camera_lens} = photo;
-          return { id, image, src: thumbnail, width: thumbnail_width, height: thumbnail_height, exif: {timestamp, rating, lat, lon, altitude, aperture, iso, shutter_speed, focal_length, camera_brand, camera_model, camera_lens} };
-        });
-        setPhotos(photos);
-      })
-      .catch((error) => {
-        console.error(error);
+    const fetchMyData = async () => {
+      const response = await fetchPhotos('/photos');
+      const data = response;
+      const photos = data.map( photo => {
+        const { id, image, thumbnail, thumbnail_width, thumbnail_height, timestamp, rating, lat, lon, altitude, aperture, iso, shutter_speed, focal_length, camera_brand, camera_model, camera_lens} = photo;
+        return { id, image, src: thumbnail, width: thumbnail_width, height: thumbnail_height, exif: {timestamp, rating, lat, lon, altitude, aperture, iso, shutter_speed, focal_length, camera_brand, camera_model, camera_lens} };
       });
+      setPhotos(photos);
+    };
+    fetchMyData();
   }, []);
 
   return <section className='section pt-[100px] lg:pt-[140px]'>
