@@ -105,17 +105,17 @@ const Lightbox = ({ image, exif, onClose }) => {
 
           <div className='text-center p-2'>
             <div className="text-xs font-medium text-gray-400 mb-1">相机</div>
-            <div className="text-sm font-semibold">{exif.camera_brand ? (exif.camera_brand + ' ' + exif.camera_model) : '--'}</div>
+            <div className="text-sm font-thin text-gray-600">{exif.camera_brand ? (exif.camera_brand + ' ' + exif.camera_model) : '--'}</div>
           </div>
 
           <div className='text-center p-2'>
             <div className="text-xs font-medium text-gray-400 mb-1">镜头</div>
-            <div className="text-sm font-semibold">{exif.camera_lens ? exif.camera_lens : '--'}</div>
+            <div className="text-sm font-thin text-gray-600">{exif.camera_lens ? exif.camera_lens : '--'}</div>
           </div>
 
           <div className='text-center p-2'>
             <div className="text-xs font-medium text-gray-400 mb-1">参数</div>
-            <div className="flex items-center gap-2 text-sm font-semibold">
+            <div className="flex items-center gap-2 text-sm font-thin text-gray-600">
               <Parameter icon={<img src={focalLengthImg} alt="focalLength" className="max-h-[16px]" />} text={exif.focal_length ? `${exif.focal_length}mm` : '--'}/>
               <Parameter icon={<RiCameraLensFill/>} text={exif.aperture ? `f/${exif.aperture}` : '--'} />
               <Parameter icon={<IoTimerOutline/>} text={exif.shutter_speed ? `${exif.shutter_speed}` : '--'} />
@@ -123,9 +123,14 @@ const Lightbox = ({ image, exif, onClose }) => {
             </div>
           </div>
 
+          { exif.altitude && <div className='text-center p-2'>
+            <div className="text-xs font-medium text-gray-400 mb-1">高度</div>
+            <div className="text-sm font-thin text-gray-600">{exif.altitude ? exif.altitude : '--'}m</div>
+          </div> }
+
           <div className='text-center cursor-pointer hover:shadow-lg duration-300 p-2'>
             <div className="text-xs font-medium text-gray-400 mb-1">地点</div>
-            <div className="text-sm font-semibold">{location}</div>
+            <div className="text-sm font-thin text-gray-600">{location}</div>
           </div>
 
         </div>
