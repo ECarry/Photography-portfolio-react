@@ -60,13 +60,13 @@ const Lightbox = ({ image, exif, onClose }) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 h-screen w-screen bg-white z-50 flex flex-col transition-all ${
+      className={`fixed top-0 left-0 h-screen w-screen bg-gray-100 z-50 flex flex-col transition-all ${
         isClosed ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
       }`}
     >
       {/* CLOSE BUTTON  */}
       <div className="h-20 flex justify-end p-2">
-        <button className="bg-white rounded-full p-2" onClick={handleClose}>
+        <button className="rounded-full p-2" onClick={handleClose}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
             <path
               fillRule="evenodd"
