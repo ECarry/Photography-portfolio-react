@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Mapbox from '../components/Mapbox';
-import { fetchPhotos } from '../api/photos'
+import getPhotos from '../api/photos';
 
 const Map = () => {
   const [ markers, setMarkers ]= useState([]);
@@ -32,7 +32,7 @@ const Map = () => {
 
   useEffect(() => {
     const fetchMyData = async () => {
-      const response = await fetchPhotos("/photos");
+      const response = await getPhotos();
       setPhotos(response);
     };
     fetchMyData();

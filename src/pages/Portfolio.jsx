@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import PhotoAlbum from "react-photo-album";
 import Lightbox from '../components/Lightbox';
-import { fetchPhotos } from '../api/photos';
+import getPhotos from '../api/photos';
 
 const renderPhoto = ({ imageProps: { alt, ...restImageProps } }) => (
   <div>
@@ -16,7 +16,7 @@ const Portfolio = () => {
 
   useEffect(() => {
     const fetchMyData = async () => {
-      const response = await fetchPhotos('/photos');
+      const response = await getPhotos();
       const data = response;
       const photos = data.map( photo => {
         const { id, image, thumbnail, thumbnail_width, thumbnail_height, timestamp, rating, lat, lon, altitude, aperture, iso, shutter_speed, focal_length, camera_brand, camera_model, camera_lens} = photo;

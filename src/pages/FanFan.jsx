@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchPhotos } from '../api/photos'
+import getPhotos from '../api/photos';
 import { useEffect, useState } from "react";
 
 import CameraParameters from '../components/CameraParameters';
@@ -11,7 +11,7 @@ const FanFan = () => {
 
   useEffect(() => {
     const fetchMyData = async () => {
-      const response = await fetchPhotos("/photos");
+      const response = await getPhotos();
       setPhotos(response);
     };
     fetchMyData();

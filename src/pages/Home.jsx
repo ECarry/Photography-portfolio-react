@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { fetchPhotos } from '../api/photos';
 import Photo from '../components/Photo'
+import getPhotos from '../api/photos';
 
 const Home = () => {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
     const fetchMyData = async () => {
-      const response = await fetchPhotos('/photos');
+      const response = await getPhotos();
+      console.log('------------', response);
       setPhotos(response);
     };
     fetchMyData();

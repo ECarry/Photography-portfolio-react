@@ -1,19 +1,14 @@
-import axios from "axios";
+import axiosInstance from "../utils/request";
 
-const BASE_URL = "https://api.ecarry.cc/api/";
+const API_URL = "photos";
 
-// 创建一个 axios 实例
-const api = axios.create({
-  baseURL: BASE_URL,
-});
-
-// 通用的 API 请求函数
-export const fetchPhotos = async (path, params) => {
+const getPhotos = async () => {
   try {
-    const response = await api.get(path, { params });
-    return response.data;
+    const response = await axiosInstance.get(API_URL);
+    return response;
   } catch (error) {
     console.error(error);
-    throw error;
   }
 };
+
+export default getPhotos;
