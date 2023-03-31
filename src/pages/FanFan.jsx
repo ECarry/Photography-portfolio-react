@@ -1,56 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import getPhotos from '../api/photos';
-import { useEffect, useState } from "react";
-
-import CameraParameters from '../components/CameraParameters';
-
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Photo from '../components/Photo';
 
 const FanFan = () => {
-  const [photos, setPhotos] = useState([])
+  const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
+    // 在 useEffect 中使用 try...catch 捕获异常，避免代码运行出错后无法继续执行
     const fetchMyData = async () => {
-      const response = await getPhotos();
-      setPhotos(response);
+      try {
+        const response = await getPhotos({ category: 2 });
+        setPhotos(response);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchMyData();
   }, []);
 
-  return <section className='section pt-[100px] lg:pt-[140px]'>
-  <div className='w-full max-w-7xl mx-auto p-6 lg:px-8'>
-    {/* TEXT */}
-    <div className='pb-10 lg:mx-0'>
-      <h1 className='h1'>FanFan</h1>
-      <a href="https://space.bilibili.com/430726" target='_blank' className='text-[#696c6d] hover:text-primary transition'><p>跟着饭饭学摄影</p></a>
-    </div>
-    {/* IMG AND METADATA */}
-    {photos.map( photo => (
-      <div className='mb-12' key={photo.id}>
-        {/* IMG */}
-        <div 
-          className='flex justify-center items-center mb-5 shadow-lg'>
-          {/* <img 
-            src={photo.thumbnail} 
-            alt="" 
-            className='max-h-[620px] xl:max-h-[820px] object-contain'
-          /> */}
-          <LazyLoadImage
-            alt=""
-            height={photo.thumbnail_height}
-            src={photo.thumbnail} // use normal <img> attributes as props
-            width={photo.thumbnail_width}
-            className="max-h-[620px] xl:max-h-[820px] object-contain"
-          />
+  return (
+    <section className='section pt-[100px] lg:pt-[140px]'>
+      <div className='w-full max-w-7xl mx-auto p-6 lg:px-8'>
+        {/* TEXT */}
+        <div className='pb-10 lg:mx-0'>
+          <h1 className='h1'>FanFan</h1>
+          <a
+            href='https://space.bilibili.com/430726'
+            target='_blank'
+            rel='noreferrer'
+            className='text-[#696c6d] hover:text-primary transition'
+          >
+            <p>跟着饭饭学摄影</p>
+          </a>
         </div>
-        {/* METADATA */}
-        <div className='flex justify-center items-center font-thin'>
-          <CameraParameters photo={photo} />
-        </div>
+        {/* IMG AND METADATA */}
+        {photos.map((photo) => (
+          <Photo key={photo.id} photo={photo} />
+        ))}
       </div>
-    ))}
-  </div>
-</section>;
+    </section>
+  );
 };
 
 export default FanFan;

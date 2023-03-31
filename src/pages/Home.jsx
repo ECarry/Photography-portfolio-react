@@ -6,14 +6,17 @@ const Home = () => {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
+    // 在 useEffect 中使用 try...catch 捕获异常，避免代码运行出错后无法继续执行
     const fetchMyData = async () => {
-      const response = await getPhotos();
-      console.log('------------', response);
-      setPhotos(response);
+      try {
+        const response = await getPhotos();
+        setPhotos(response);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchMyData();
   }, []);
-
   return (
     <section className='section pt-[100px] md:pt-[140px]'>
       <div className='w-full max-w-7xl mx-auto p-6 lg:px-8'>

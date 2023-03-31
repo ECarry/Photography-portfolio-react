@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+const accessToken = import.meta.env.VITE_APP_MAPBOX_ACCESS_TOKEN;
+
 const Mapbox = ({ markers }) => {
   const [map, setMap] = useState(null);
 
@@ -12,7 +14,7 @@ const Mapbox = ({ markers }) => {
     }
 
     if (!map) {
-      mapboxgl.accessToken = import.meta.env.VITE_APP_MAPBOX_ACCESS_TOKEN;
+      mapboxgl.accessToken = accessToken
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/ecarry/cldmhu6tr000001n33ujbxf7j',

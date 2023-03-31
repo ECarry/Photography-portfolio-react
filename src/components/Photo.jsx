@@ -5,12 +5,12 @@ const Photo = ({ photo }) => {
   return (
     <div className='mb-6'>
       {/* IMG */}
-      <div className='flex justify-center items-center mb-5 shadow-lg md:py-10'>
+      <div className='flex justify-center items-center mb-5 shadow-lg md:p-5'>
         <LazyLoadImage
           alt=''
-          height={photo.thumbnail_height}
-          src={photo.thumbnail}
-          width={photo.thumbnail_width}
+          height={photo.height}
+          width={photo.width}
+          src={photo.image}
           className='max-h-[620px] xl:max-h-[820px] object-contain'
         />
       </div>

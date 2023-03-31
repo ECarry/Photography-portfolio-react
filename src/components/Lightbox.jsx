@@ -37,7 +37,7 @@ const Parameter = ({ icon, text }) => (
 const Lightbox = ({ image, exif, onClose }) => {
   const [ isClosed, setIsClosed ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(true);
-  const [ location, setLocation  ] = useState()
+  const [ location, setLocation  ] = useState("--")
 
   const access_token = import.meta.env.VITE_APP_MAPBOX_ACCESS_TOKEN;
 
@@ -52,11 +52,12 @@ const Lightbox = ({ image, exif, onClose }) => {
       axios.get(url)
       .then(res => {
         const { features } = res.data
-        console.log(features[0].place_name);
         setLocation(features[0].place_name)
       })
     }else setLocation('--')
-  })
+  }, [exif.lon])
+
+  const camera_info = `${exif.camera_brand ?? "--"} ${exif.camera_model ?? "--"}`;
 
   return (
     <div
@@ -105,7 +106,7 @@ const Lightbox = ({ image, exif, onClose }) => {
 
           <div className='text-center p-2'>
             <div className="text-xs font-medium text-gray-400 mb-1">相机</div>
-            <div className="text-sm font-extralight text-gray-600">{exif.camera_brand ? (exif.camera_brand + ' ' + exif.camera_model) : '--'}</div>
+            <div className="text-sm font-extralight text-gray-600">{camera_info}</div>
           </div>
 
           <div className='text-center p-2'>
