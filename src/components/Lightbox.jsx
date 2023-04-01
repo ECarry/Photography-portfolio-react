@@ -66,7 +66,7 @@ const Lightbox = ({ image, exif, onClose }) => {
       }`}
     >
       {/* CLOSE BUTTON  */}
-      <div className="h-20 flex justify-end p-2">
+      <div className="h-10 flex justify-end p-2">
         <button className="rounded-full p-2" onClick={handleClose}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-6 h-6">
             <path

@@ -19,7 +19,7 @@ const FanFan = () => {
   }, []);
 
   return (
-    <section className='section pt-[100px] lg:pt-[140px]'>
+    <section className='section pt-[60px] lg:pt-[100px]'>
       <div className='w-full max-w-7xl mx-auto p-6 lg:px-8'>
         {/* TEXT */}
         <div className='pb-10 lg:mx-0'>
