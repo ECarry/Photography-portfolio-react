@@ -7,7 +7,7 @@
     @apply overflow-x-hidden text-primary font-secondary bg-white;
   }
   .h1 {
-    @apply text-[36px] font-primary font-bold capitalize leading-[120%] tracking-[-0.05em] mb-2;
+    @apply text-[36px] font-jura font-bold capitalize leading-[120%] tracking-[-0.05em] mb-2;
   }
   .section {
     @apply h-screen w-screen;

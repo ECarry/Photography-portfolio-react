@@ -34,6 +34,21 @@ const Parameter = ({ icon, text }) => (
   </span>
 );
 
+const formatDateTime = (dateTimeStr) => {
+  if (!dateTimeStr) {
+    return ''
+  }
+  const d = new Date(dateTimeStr);
+  const year = d.getFullYear().toString().slice(-2);
+  const month = (d.getMonth() + 1).toString().padStart(2, '0');
+  const date = d.getDate().toString().padStart(2, '0');
+  const hours = d.getHours().toString().padStart(2, '0');
+  const minutes = d.getMinutes().toString().padStart(2, '0');
+  const seconds = d.getSeconds().toString().padStart(2, '0');
+
+  return `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
+}
+
 const Lightbox = ({ image, exif, onClose }) => {
   const [ isClosed, setIsClosed ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(true);
@@ -54,10 +69,11 @@ const Lightbox = ({ image, exif, onClose }) => {
         const { features } = res.data
         setLocation(features[0].place_name)
       })
-    }else setLocation('--')
+    }else setLocation('')
   }, [exif.lon])
 
   const camera_info = `${exif.camera_brand ?? "--"} ${exif.camera_model ?? "--"}`;
+  const formatDateTimeStr = formatDateTime(exif.timestamp)
 
   return (
     <div
@@ -104,35 +120,40 @@ const Lightbox = ({ image, exif, onClose }) => {
             <Rating rating={exif.rating} />
           </div>
 
-          <div className='text-center p-2'>
+          <div className='text-center p-2 font-jura'>
             <div className="text-xs font-medium text-gray-400 mb-1">相机</div>
             <div className="text-sm font-extralight text-gray-600">{camera_info}</div>
           </div>
 
-          <div className='text-center p-2'>
+          <div className='text-center p-2 font-jura'>
             <div className="text-xs font-medium text-gray-400 mb-1">镜头</div>
             <div className="text-sm font-extralight text-gray-600">{exif.camera_lens ? exif.camera_lens : '--'}</div>
           </div>
 
           <div className='text-center p-2'>
             <div className="text-xs font-medium text-gray-400 mb-1">参数</div>
-            <div className="flex items-center gap-2 text-sm font-extralight text-gray-600">
+            <div className="flex items-center gap-2 text-sm font-extralight text-gray-600 font-pacifico">
               <Parameter icon={<img src={focalLengthImg} alt="focalLength" className="max-h-[16px]" />} text={exif.focal_length ? `${exif.focal_length}mm` : '--'}/>
               <Parameter icon={<RiCameraLensFill/>} text={exif.aperture ? `f/${exif.aperture}` : '--'} />
-              <Parameter icon={<IoTimerOutline/>} text={exif.shutter_speed ? `${exif.shutter_speed}` : '--'} />
+              <Parameter icon={<IoTimerOutline/>} text={exif.shutter_speed ? `${exif.shutter_speed}s` : '--'} />
               <Parameter icon={<img src={isoImg} alt="ISO" className='max-h-[16px]' />} text={exif.iso ? `${exif.iso}` : '--'} />
             </div>
           </div>
 
-          { exif.altitude && <div className='text-center p-2'>
+          { exif.altitude && <div className='text-center p-2 font-jura'>
             <div className="text-xs font-medium text-gray-400 mb-1">高度</div>
-            <div className="text-sm font-extralight text-gray-600">{exif.altitude ? exif.altitude : '--'}m</div>
+            <div className="text-sm font-extralight text-gray-600">{exif.altitude}m</div>
           </div> }
 
-          <div className='text-center cursor-pointer hover:shadow-lg duration-300 p-2'>
+          { exif.timestamp && <div className='text-center p-2 font-jura'>
+            <div className="text-xs font-medium text-gray-400 mb-1">拍摄时间</div>
+            <div className="text-sm font-extralight text-gray-600">{formatDateTimeStr}</div>
+          </div> }
+
+          { location && <div className='text-center cursor-pointer hover:shadow-lg duration-300 p-2'>
             <div className="text-xs font-medium text-gray-400 mb-1">地点</div>
             <div className="text-sm font-extralight text-gray-600">{location}</div>
-          </div>
+          </div> }
 
         </div>
       </div>
