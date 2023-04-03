@@ -26,31 +26,62 @@ const CameraParameters = ({ photo }) => {
     shutter_speed,
     iso,
     altitude,
+    lat,
+    lon,
   } = photo;
 
+  function formatDegrees(num) {
+    const d = parseInt(num);
+    const m = Math.abs(parseInt((num - d) * 60));
+    const s = Math.abs(parseInt((((num - d) * 60) - m) * 60));
+    return `${d}°${m}'${s}"`;
+  }
+  
+  function convertCoordinates(lat, lon) {
+    if (lat === null || lat === undefined || lon === null || lon === undefined) {
+      return "";
+    }  
+    const latDirection = lat >= 0 ? "N" : "S";
+    const lonDirection = lon >= 0 ? "E" : "W";
+    const latDegrees = formatDegrees(lat);
+    const lonDegrees = formatDegrees(lon);
+    return `${latDegrees} ${latDirection} ${lonDegrees} ${lonDirection}`;
+  }
+  
+  const coordinates = convertCoordinates(lat, lon)
+
   return (
-    <div className="flex justify-center w-full md:justify-between items-center md:px-10 text-gray-600">
+    <div className="flex w-full justify-between items-center p-2 md:px-10 text-gray-600 font-jura">
       {/* CAMERA TEXT */}
-      <div className="text-center hidden md:block">
-        <span className="md:text-xl font-medium">{camera_brand} {camera_model}</span>
-        {camera_lens && <p>{camera_lens}</p>}
+      <div className="text-center">
+        <span className="text-sm md:text-xl font-medium">{camera_model}</span>
+        {camera_lens && <p className='text-gray-400 text-[8px] md:text-sm'>{camera_lens}</p>}
       </div>
 
       {/* CAMERA PARAS */}
       {camera_brand && (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           {/* CAMERA LOGO */}
-          <div className="flex justify-center items-center w-[80px] h-[40px] overflow-hidden">
+          <div className="flex justify-center items-center max-w-[20px] md:max-w-[80px]">
             {brandLogos[camera_brand] && <img src={brandLogos[camera_brand]} alt="" />}
           </div>
 
+          <span className="border-r-2 border-gray-200 h-6 md:h-10"></span>
+
           {/* PARAS */}
-          <div className="font-thin flex gap-x-3">
-            {focal_length && <span>{focal_length}mm</span>}
-            {aperture && <span>f/{aperture}</span>}
-            {shutter_speed && <span>{shutter_speed}s</span>}
-            {iso && <span>ISO{iso}</span>}
-            {altitude && <span>{altitude}m</span>}
+          <div className='felx flex-row'>
+            <div className="text-xs font-bold flex gap-2 md:text-base font-pacifico">
+              {focal_length && <span>{focal_length}mm</span>}
+              {aperture && <span>f/{aperture}</span>}
+              {shutter_speed && <span>{shutter_speed}s</span>}
+              {iso && <span>iso{iso}</span>}
+            </div>
+
+            <div className="font-thin flex gap-2 text-gray-400 text-[8px] md:text-sm">
+              <span>{coordinates}</span>
+              {altitude && <span>{altitude}m</span>}
+            </div>
+            
           </div>
         </div>
       )}

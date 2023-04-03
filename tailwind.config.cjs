@@ -8,6 +8,8 @@ module.exports = {
     fontFamily: {
       primary: 'Playfair Display',
       secondary: 'Mulish',
+      pacifico: ['Pacifico', 'cursive'],
+      jura: ['Jura', 'sans-serif']
     },
     screens: {
       sm: '640px',
@@ -19,7 +21,6 @@ module.exports = {
       colors: {
         primary: '#0E1112',
         grey: '#484B4B',
-
         accent: '#EEF7F9',
       },
     },

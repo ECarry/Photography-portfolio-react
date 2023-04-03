@@ -8,7 +8,7 @@ import Logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-  return <header className='fixed top-0 left-0 w-full z-30 h-[60px] md:h-[100px] flex items-center backdrop-blur'>
+  return <header className='fixed top-0 left-0 w-full z-30 h-[60px] md:h-[100px] flex items-center backdrop-blur font-jura'>
     <div className='flex w-full items-center justify-between max-w-7xl mx-auto p-6 md:px-8'>
       {/* LOGO */}
       <Link to={'/'} className='max-w-[250px]'>
