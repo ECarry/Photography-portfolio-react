@@ -5,6 +5,7 @@ import { IoTimerOutline } from 'react-icons/io5'
 import isoImg from '../assets/iso.png'
 import focalLengthImg from '../assets/focal-length.png'
 import axios from 'axios';
+import MapPop from './MapPOP';
 
 
 const Rating = ({ rating }) => {
@@ -52,9 +53,15 @@ const formatDateTime = (dateTimeStr) => {
 const Lightbox = ({ image, exif, onClose }) => {
   const [ isClosed, setIsClosed ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(true);
-  const [ location, setLocation  ] = useState("--")
+  const [ location, setLocation  ] = useState("--");
+  const [ isShowPop, setIsShowPop ] = useState(false)
 
   const access_token = import.meta.env.VITE_APP_MAPBOX_ACCESS_TOKEN;
+
+  const props = {
+    isShowPop,
+    coordinates: [exif.lon, exif.lat]
+  }
 
   const handleClose = () => {
     setIsClosed(true);
@@ -98,7 +105,7 @@ const Lightbox = ({ image, exif, onClose }) => {
         {isLoading && (
           <div className="flex flex-col items-center justify-center h-screen">
             <div className="w-12 h-12 mb-4 rounded-full border-t-4 border-b-4 text-[#696c6d] animate-spin"></div>
-            <p className="text-xl font-medium text-[#696c6d]">Loading...</p>
+            <p className="text-xl font-medium text-[#696c6d] font-jura">Loading...</p>
           </div>
         )}
         <div className="max-w-full">
@@ -150,10 +157,12 @@ const Lightbox = ({ image, exif, onClose }) => {
             <div className="text-sm font-extralight text-gray-600">{formatDateTimeStr}</div>
           </div> }
 
-          { location && <div className='text-center cursor-pointer hover:shadow-lg duration-300 p-2'>
+          { location && <div onClick={() => setIsShowPop(!isShowPop) } className='text-center cursor-pointer hover:shadow-lg duration-300 p-2'>
             <div className="text-xs font-medium text-gray-400 mb-1">地点</div>
             <div className="text-sm font-extralight text-gray-600">{location}</div>
           </div> }
+
+          { isShowPop && <div><MapPop props={ props } /></div> }
 
         </div>
       </div>
