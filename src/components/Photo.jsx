@@ -13,7 +13,6 @@ const StyledBlurhash = styled(Blurhash)`
   position: absolute !important;
   top: 0;
   left: 0;
-  overflow: hidden;
 `;
 
 const Photo = ({ photo }) => {
@@ -40,10 +39,12 @@ const Photo = ({ photo }) => {
             onLoad={handleLoad}
             width={photo.thumbnail_width}
             height={photo.thumbnail_height}
+            className='max-h-[820px] object-contain'
             beforeLoad={handleLoadStarted}
           />
           {!isLoaded && isLoadStarted && (
             <StyledBlurhash
+              className='max-h-[820px] object-contain'
               hash={photo.hash_code}
               width={photo.thumbnail_width}
               height={photo.thumbnail_height}
