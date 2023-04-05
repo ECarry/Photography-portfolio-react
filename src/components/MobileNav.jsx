@@ -18,6 +18,7 @@ const menuVariants = {
 
 const MobileNav = () => {
   const [openMenu, setOpenMenu] = useState(false);
+
   return <nav className='text-primary md:hidden'>
     {/* NAV OPEN BUTTON */}
     <div onClick={() => setOpenMenu(true)} className='text-3xl cursor-pointer'>
@@ -34,7 +35,7 @@ const MobileNav = () => {
         <IoMdClose />
       </div>
       {/* MENU LIST */}
-      <ul className='h-full flex flex-col justify-center items-center gap-y-8 text-3xl text-primary font-primary font-bold'>
+      <ul className='h-full flex flex-col justify-center items-center gap-y-8 text-3xl text-primary font-jura font-bold'>
         <li><Link to={'/'}>Home</Link></li>
         <li><Link to={'/portfolio'}>Portfolio</Link></li>
         <li><Link to={'/fanfan'}>FanFan</Link></li>

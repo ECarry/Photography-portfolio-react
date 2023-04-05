@@ -3,24 +3,14 @@ import PhotoAlbum from 'react-photo-album';
 import Lightbox from '../components/Lightbox';
 import getPhotos from '../api/photos';
 
-const renderPhoto = ({ imageProps: { alt, style: { borderRadius, overflow, boxShadow, transition, ...restStyle }, ...restImageProps } }) => (
-  <img 
-    alt={alt} 
-    style={{
-      ...restStyle,
-      borderRadius: "10px",
-      overflow: 'hidden',
-      boxShadow: "0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)",
-      transition: "transform 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-    }}
-    {...restImageProps}
-    onMouseEnter={(e) => {
-      e.target.style.transform = "scale(1.03)";
-    }}
-    onMouseLeave={(e) => {
-      e.target.style.transform = "scale(1)";
-    }}
-  />
+const renderPhoto = ({ imageProps: { alt, style, ...restImageProps } }) => (
+  <div className='relative overflow-hidden rounded-md md:rounded-xl drop-shadow-xl group mb-4'>
+    <img 
+      alt={alt} 
+      {...restImageProps}
+      className='transition-transform group-hover:scale-110 duration-300 cursor-pointer group-hover:brightness-110'
+    />
+  </div>
 );
 
 const Portfolio = () => {
@@ -77,7 +67,7 @@ const Portfolio = () => {
   const SPACING = 20;
 
   return (
-    <section className="section pt-[60px] lg:pt-[100px]">
+    <section className="section pt-[3.75rem] lg:pt-[6.25rem]">
       <div className="w-full max-w-7xl mx-auto p-6 lg:px-8">
         {/* TEXT */}
         <div className="pb-10 lg:mx-0">

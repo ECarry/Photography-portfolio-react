@@ -5,8 +5,6 @@ import { IoTimerOutline } from 'react-icons/io5'
 import isoImg from '../assets/iso.png'
 import focalLengthImg from '../assets/focal-length.png'
 import axios from 'axios';
-import MapPop from './MapPOP';
-
 
 const Rating = ({ rating }) => {
   const fullStars = Math.floor(rating);
@@ -54,14 +52,8 @@ const Lightbox = ({ image, exif, onClose }) => {
   const [ isClosed, setIsClosed ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(true);
   const [ location, setLocation  ] = useState("--");
-  const [ isShowPop, setIsShowPop ] = useState(false)
 
   const access_token = import.meta.env.VITE_APP_MAPBOX_ACCESS_TOKEN;
-
-  const props = {
-    isShowPop,
-    coordinates: [exif.lon, exif.lat]
-  }
 
   const handleClose = () => {
     setIsClosed(true);
@@ -157,12 +149,10 @@ const Lightbox = ({ image, exif, onClose }) => {
             <div className="text-sm font-extralight text-gray-600">{formatDateTimeStr}</div>
           </div> }
 
-          { location && <div onClick={() => setIsShowPop(!isShowPop) } className='text-center cursor-pointer hover:shadow-lg duration-300 p-2'>
+          { location && <div onClick={() => setIsShowPop(true) } className='text-center cursor-pointer hover:shadow-lg duration-300 p-2'>
             <div className="text-xs font-medium text-gray-400 mb-1">地点</div>
             <div className="text-sm font-extralight text-gray-600">{location}</div>
           </div> }
-
-          { isShowPop && <div><MapPop props={ props } /></div> }
 
         </div>
       </div>

@@ -4,14 +4,14 @@ const API_PRIMARY = "https://photography.ecarry.cc:88/api/";
 const API_BACKUP = "https://api.ecarry.cc/api/";
 
 const axiosInstance = axios.create({
-  baseURL: API_BACKUP,
+  baseURL: API_PRIMARY,
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-let isUsingPrimaryAPI = false;
+let isUsingPrimaryAPI = true;
 
 axiosInstance.interceptors.response.use(
   (response) => {
