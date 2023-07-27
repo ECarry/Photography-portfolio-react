@@ -31,7 +31,7 @@ const Portfolio = () => {
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const data = await getPhotos();
+        const data = await getPhotos({ category: 1 });
         const photos = data.map(({ id, image, thumbnail, thumbnail_width, thumbnail_height, timestamp, rating, lat, lon, altitude, aperture, iso, shutter_speed, focal_length, camera_brand, camera_model, camera_lens }) => ({
           id,
           image,
