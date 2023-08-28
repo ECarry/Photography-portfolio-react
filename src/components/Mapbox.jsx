@@ -19,7 +19,7 @@ const Mapbox = ({ markers }) => {
         container: 'map',
         style: 'mapbox://styles/ecarry/cldmhu6tr000001n33ujbxf7j',
         center: [118.079986, 24.439984],
-        zoom: 8,
+        zoom: 6,
         //antialias: true, //抗锯齿
         projection: 'mercator',
       });

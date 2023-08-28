@@ -2,7 +2,7 @@ import React from 'react';
 import DJI from '../assets/DJI.svg';
 import Sony from '../assets/Sony.svg';
 import Canon from '../assets/Canon.svg';
-import APPLE from '../assets/APPLE.svg';
+import Apple from '../assets/APPLE.svg';
 import Nikon from '../assets/Nikon.svg';
 import FUJIFILM from '../assets/FUJIFILM.svg';
 
@@ -12,7 +12,7 @@ const brandLogos = {
   DJI: DJI,
   NIKON: Nikon,
   Canon: Canon,
-  APPLE: APPLE,
+  Apple: Apple,
   FUJIFILM: FUJIFILM,
 };
 
