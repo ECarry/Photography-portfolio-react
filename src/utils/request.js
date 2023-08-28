@@ -19,16 +19,6 @@ axiosInstance.interceptors.response.use(
     // 在这里处理响应数据，比如统一处理错误码等等
     // console.log('------data-----',data);
 
-    if (isUsingPrimaryAPI) {
-      const newData = response.data.map((item) => {
-        return {
-          ...item,
-          image: item.image.replace('https://photography.ecarry.cc', 'https://photography.ecarry.cc:88'),
-          thumbnail: item.thumbnail.replace('https://photography.ecarry.cc', 'https://photography.ecarry.cc:88'),
-        };
-      });
-      return newData
-    }
     return data;
   },
   (error) => {
